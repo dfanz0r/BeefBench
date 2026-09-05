@@ -65,7 +65,8 @@ static class Ansi
             }
             if (inEscape)
             {
-                if (c == 'm') inEscape = false;
+                if (c == 'm')
+                    inEscape = false;
                 continue;
             }
             len++;
@@ -197,7 +198,10 @@ class Table
             Width = header.Length;
         }
 
-        public ~this() { delete Header; }
+        public ~this()
+        {
+            delete Header;
+        }
     }
 
     List<Column> mColumns = new .() ~ DeleteContainerAndItems!(_);
@@ -242,8 +246,10 @@ class Table
         sb.Append(Box.TopLeft);
         for (int i = 0; i < mColumns.Count; i++)
         {
-            for (int j = 0; j < mColumns[i].Width + 2; j++) sb.Append(Box.Horizontal);
-            if (i < mColumns.Count - 1) sb.Append(Box.TeeTop);
+            for (int j = 0; j < mColumns[i].Width + 2; j++)
+                sb.Append(Box.Horizontal);
+            if (i < mColumns.Count - 1)
+                sb.Append(Box.TeeTop);
         }
         sb.Append(Box.TopRight);
         sb.Append(Ansi.Reset);
@@ -272,8 +278,10 @@ class Table
         sb.Append(Box.TeeLeft);
         for (int i = 0; i < mColumns.Count; i++)
         {
-            for (int j = 0; j < mColumns[i].Width + 2; j++) sb.Append(Box.Horizontal);
-            if (i < mColumns.Count - 1) sb.Append(Box.Cross);
+            for (int j = 0; j < mColumns[i].Width + 2; j++)
+                sb.Append(Box.Horizontal);
+            if (i < mColumns.Count - 1)
+                sb.Append(Box.Cross);
         }
         sb.Append(Box.TeeRight);
         sb.Append(Ansi.Reset);
@@ -305,8 +313,10 @@ class Table
         sb.Append(Box.BottomLeft);
         for (int i = 0; i < mColumns.Count; i++)
         {
-            for (int j = 0; j < mColumns[i].Width + 2; j++) sb.Append(Box.Horizontal);
-            if (i < mColumns.Count - 1) sb.Append(Box.TeeBottom);
+            for (int j = 0; j < mColumns[i].Width + 2; j++)
+                sb.Append(Box.Horizontal);
+            if (i < mColumns.Count - 1)
+                sb.Append(Box.TeeBottom);
         }
         sb.Append(Box.BottomRight);
         sb.Append(Ansi.Reset);

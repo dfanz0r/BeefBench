@@ -118,7 +118,8 @@ class BenchmarkRunner
         let progressBar = scope ProgressBar();
 
         // Reserve space
-        for (int i = 0; i < 5; i++) Console.WriteLine();
+        for (int i = 0; i < 5; i++)
+            Console.WriteLine();
         Console.WriteLine(); // For progress bar
         Cursor.Up(1); // Move to progress bar line
 
@@ -206,7 +207,8 @@ class BenchmarkRunner
         }
 
         defer {
-            for (let list in lists) delete list;
+            for (let list in lists)
+                delete list;
         }
 
         if (categories.Count == 0)
@@ -242,13 +244,15 @@ class BenchmarkRunner
                 }
             }
 
-            if (!baselineRes.HasValue) continue;
+            if (!baselineRes.HasValue)
+                continue;
 
             let b = baselineRes.Value;
 
             for (let c in entries)
             {
-                if (c.Entry.IsBaseline) continue;
+                if (c.Entry.IsBaseline)
+                    continue;
 
                 double speedup = b.Mean / c.Mean;
                 
@@ -564,9 +568,12 @@ class BenchmarkRunner
 
     private static String FormatTime(double ns)
     {
-        if (ns >= 1000000000.0) return new String()..AppendF($"{ns / 1000000000.0:F4} s");
-        if (ns >= 1000000.0) return new String()..AppendF($"{ns / 1000000.0:F4} ms");
-        if (ns >= 1000.0) return new String()..AppendF($"{ns / 1000.0:F4} us");
+        if (ns >= 1000000000.0)
+            return new String()..AppendF($"{ns / 1000000000.0:F4} s");
+        if (ns >= 1000000.0)
+            return new String()..AppendF($"{ns / 1000000.0:F4} ms");
+        if (ns >= 1000.0)
+            return new String()..AppendF($"{ns / 1000.0:F4} us");
         return new String()..AppendF($"{ns:F4} ns");
     }
 
@@ -574,9 +581,12 @@ class BenchmarkRunner
     {
         String throughputUnit = String.IsNullOrEmpty(unit) ? "ops/s" : unit;
 
-        if (throughput >= 1000000000.0) return new String()..AppendF($"{throughput / 1000000000.0:F4} G {throughputUnit}");
-        if (throughput >= 1000000.0) return new String()..AppendF($"{throughput / 1000000.0:F4} M {throughputUnit}");
-        if (throughput >= 1000.0) return new String()..AppendF($"{throughput / 1000.0:F4} K {throughputUnit}");
+        if (throughput >= 1000000000.0)
+            return new String()..AppendF($"{throughput / 1000000000.0:F4} G {throughputUnit}");
+        if (throughput >= 1000000.0)
+            return new String()..AppendF($"{throughput / 1000000.0:F4} M {throughputUnit}");
+        if (throughput >= 1000.0)
+            return new String()..AppendF($"{throughput / 1000.0:F4} K {throughputUnit}");
         return new String()..AppendF($"{throughput:F4} {throughputUnit}");
     }
 
