@@ -89,20 +89,20 @@ class BenchmarkRunner
             csv.Append("\",\"");
             csv.Append(GetDisplayName(result));
             csv.Append("\",\"");
-            csv.Append(result.Entry.Metadata.Suite);
+            csv.Append(result.Entry.Metadata.Suite ?? "");
             csv.Append("\",\"");
-            csv.Append(result.Entry.Metadata.CaseName);
+            csv.Append(result.Entry.Metadata.CaseName ?? "");
             csv.Append("\",\"");
-            csv.Append(result.Entry.Category);
+            csv.Append(result.Entry.Category ?? "");
             csv.Append("\",\"");
-            csv.Append(result.Entry.Metadata.Tags);
+            csv.Append(result.Entry.Metadata.Tags ?? "");
             csv.Append("\",\"");
-            csv.Append(result.Entry.Metadata.Dimensions);
+            csv.Append(result.Entry.Metadata.Dimensions ?? "");
             csv.Append("\",");
             csv.AppendF($"{result.Mean:F4},{result.Error:F4},{result.StdDev:F4},{result.Median:F4},");
             csv.Append(result.HasThroughput ? "true," : "false,");
             csv.Append('"');
-            csv.Append(result.ThroughputUnit);
+            csv.Append(result.ThroughputUnit ?? "");
             csv.Append("\",");
             csv.AppendF($"{result.ThroughputMean:F4},{result.ThroughputError:F4},{result.ThroughputStdDev:F4},{result.ThroughputMedian:F4}\n");
         }
