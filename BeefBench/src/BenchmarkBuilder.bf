@@ -1,6 +1,6 @@
 using System;
 
-namespace Benchmarks.Framework;
+namespace BeefBench;
 
 delegate void BenchmarkCaseIntVariantFactory(BenchmarkCaseBuilder builder, int32 value);
 delegate void BenchmarkCaseStringVariantFactory(BenchmarkCaseBuilder builder, StringView value);

@@ -1,0 +1,18 @@
+FileVersion = 1
+Dependencies = {corlib = "*"}
+
+[Project]
+Name = "BeefBench"
+TargetType = "BeefLib"
+
+[Configs.Debug.Win64]
+
+[Configs.Release.Win64]
+
+[Configs.Test.Win64]
+
+[Configs.Debug.Linux64]
+
+[Configs.Release.Linux64]
+
+[Configs.Test.Linux64]

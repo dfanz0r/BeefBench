@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Text;
 
-namespace Benchmarks.Framework;
+namespace BeefBench;
 
 struct Color
 {

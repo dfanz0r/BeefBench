@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Collections;
 using System.IO;
 
-namespace Benchmarks.Framework;
+namespace BeefBench;
 
 struct BenchmarkResult
 {
@@ -55,6 +55,12 @@ struct MetricStats
 
 class BenchmarkRunner
 {
+    /// Heading of the live table; applications set their own name.
+    public static StringView Title = "BeefBench";
+
+    /// Where RunAll writes the results table; an empty path writes no file.
+    public static StringView CsvPath = "benchmark_results.csv";
+
     public static void RunAll(bool useTui = true)
     {
         PrintHeader();
@@ -107,7 +113,8 @@ class BenchmarkRunner
             csv.AppendF($"{result.ThroughputMean:F4},{result.ThroughputError:F4},{result.ThroughputStdDev:F4},{result.ThroughputMedian:F4}\n");
         }
 
-        File.WriteAllText("benchmark_results.csv", csv).IgnoreError();
+        if (!CsvPath.IsEmpty)
+            File.WriteAllText(CsvPath, csv).IgnoreError();
     }
 
     private static void RunWithTui(List<BenchmarkResult> results, Stopwatch stopwatch)
@@ -172,7 +179,7 @@ class BenchmarkRunner
         String s = scope .();
         Ansi.Color(s, Theme.Primary);
         s.Append(Ansi.Bold);
-        s.Append("SizzleBench");
+        s.Append(Title);
         s.Append(Ansi.Reset);
         Console.WriteLine(s);
         Console.WriteLine();

@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 
-namespace Benchmarks.Framework;
+namespace BeefBench;
 
 delegate void BenchmarkFunc();
 delegate void BenchmarkLifecycleFunc();
@@ -99,11 +99,15 @@ static class BenchmarkRegistry
         delete entry.Metadata.Dimensions;
     }
 
-    public static void Register(String name, BenchmarkFunc func, int iterations = 1000, int warmupCount = 5, int measurementCount = 15, String category = null, bool isBaseline = false)
+    /// Registers a benchmark. The registry keeps its own copies of `name` and `category`, so string
+    /// literals and temporaries are fine; it takes ownership of `func` (pass `new => Method`).
+    public static void Register(StringView name, BenchmarkFunc func, int iterations = 1000, int warmupCount = 5, int measurementCount = 15, StringView category = default, bool isBaseline = false)
     {
-        Register(name, func, iterations, warmupCount, measurementCount, category, isBaseline, .Default, .Default);
+        Register(new String(name), func, iterations, warmupCount, measurementCount, category.IsEmpty ? null : new String(category), isBaseline, .Default, .Default);
     }
 
+    // The overloads taking String (not StringView) and report options or metadata take OWNERSHIP of every
+    // string and delegate they are given: pass heap strings (new String(...)), never literals.
     public static void Register(String name, BenchmarkFunc func, int iterations, int warmupCount, int measurementCount, String category, bool isBaseline, BenchmarkReportOptions reportOptions)
     {
         Register(name, func, iterations, warmupCount, measurementCount, category, isBaseline, reportOptions, .Default);
@@ -119,6 +123,7 @@ static class BenchmarkRegistry
         Entries.Add(.(name, func, iterations, warmupCount, measurementCount, category, isBaseline, reportOptions, metadata, setupFunc, teardownFunc));
     }
 
+    /// Takes ownership of every string and delegate in the entry (heap strings only, never literals).
     public static void Register(BenchmarkEntry entry)
     {
         Entries.Add(entry);

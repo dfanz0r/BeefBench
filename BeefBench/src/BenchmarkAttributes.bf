@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 
-namespace Benchmarks.Framework;
+namespace BeefBench;
 
 [AttributeUsage(.Class)]
 struct BenchmarkSuiteAttribute : Attribute, IOnTypeInit
@@ -116,7 +116,7 @@ struct GenerateBenchmarkRegistrationsAttribute : Attribute, IOnTypeInit
 
         String generated = scope .();
         generated.Append("public static void GeneratedRegisterBenchmarks()\n{\n");
-        generated.Append(scope $"    let suite = scope Benchmarks.Framework.BenchmarkSuiteBuilder(\"{suiteName}\");\n");
+        generated.Append(scope $"    let suite = scope BeefBench.BenchmarkSuiteBuilder(\"{suiteName}\");\n");
         generated.Append("    suite.Iterations(1);\n");
         generated.Append("    suite.WarmupCount(3);\n");
         generated.Append("    suite.MeasurementCount(15);\n");
